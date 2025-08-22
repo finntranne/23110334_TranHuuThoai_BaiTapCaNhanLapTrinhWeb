@@ -18,7 +18,7 @@ public class Profile extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		if (session != null) {
 			String name = (String) session.getAttribute("username");
-			printWriter.println("Chào bạn, " + name + " đến với trang quản lý tài khoản");
+			printWriter.println("Chào bạn, " + name + " đã login bằng Session");
 		} else {
 			resp.sendRedirect("/HelloServlet/Login.html");
 		}

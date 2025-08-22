@@ -31,7 +31,7 @@ public class HelloServlet extends HttpServlet {
 			resp.sendRedirect("/HelloServlet/login");
 		}
 		// hiển thị lên trang bằng đối tượng PrintWriter()
-		printWriter.println("Xin chao " + name);
+		printWriter.println("Xin chao " + name + " da login bang Cookie");
 	}
 
 }

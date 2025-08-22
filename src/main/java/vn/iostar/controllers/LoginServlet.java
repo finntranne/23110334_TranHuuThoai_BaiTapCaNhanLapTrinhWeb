@@ -16,7 +16,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String user = req.getParameter("username");
 		String pass = req.getParameter("password");
-		if (user.equals("cookie") && pass.equals("123")) {
+		String method = req.getParameter("Method");
+		if (method.equals("Cookie")&& user.equals("tranhuuthoai") && pass.equals("123")) {
 			
 			Cookie cookie = new Cookie("username", user);
 
@@ -26,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 
 			resp.sendRedirect(req.getContextPath() + "/hello");
 		}
-		else if(user.equals("session") && pass.equals("123")){
+		else if(method.equals("Session")&& user.equals("tranhuuthoai") && pass.equals("123")){
 	
 			HttpSession session = req.getSession();
 			session.setAttribute("username", user);
