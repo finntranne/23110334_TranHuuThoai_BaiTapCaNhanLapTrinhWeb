@@ -1,0 +1,12 @@
+package vn.iostar.DAO;
+
+import java.awt.List;
+import vn.iostar.Model.User;
+
+public interface IUserDAO {
+	
+	List<User> findAll();
+	
+	
+
+}

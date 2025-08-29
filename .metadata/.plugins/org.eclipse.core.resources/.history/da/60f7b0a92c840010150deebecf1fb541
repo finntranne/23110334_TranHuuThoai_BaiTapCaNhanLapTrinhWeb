@@ -1,0 +1,5 @@
+package vn.iostar.DAO.impl;
+
+public class UserDAOImpl {
+
+}

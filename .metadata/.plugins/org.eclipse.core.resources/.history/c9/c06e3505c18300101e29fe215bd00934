@@ -1,0 +1,5 @@
+package vn.iostar.Model;
+
+public class User {
+
+}

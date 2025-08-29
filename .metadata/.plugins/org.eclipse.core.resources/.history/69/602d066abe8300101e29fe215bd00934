@@ -1,0 +1,40 @@
+package vn.iostar.Connection;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+
+public class DBConnection {
+
+	private final String serverName = "FINNTRAN"; // Tên server SQL
+	private final String dbName = "KNCSDL"; // Tên database
+	private final String portNumber = "1433"; // Port mặc định SQL Server
+	private final String instance = ""; // Nếu có instance: "SQLEXPRESS"
+	private final String userID = "sa"; // Tài khoản SQL Server
+	private final String password = "123456"; // Mật khẩu SQL Server
+
+	public Connection getConnection() throws Exception {
+		String url = "jdbc:sqlserver://" + serverName + "\\" + instance + ":" + portNumber + ";databaseName=" + dbName
+				+ ";encrypt=true;trustServerCertificate=true"; // 👈 Thêm dòng này
+
+		if (instance == null || instance.trim().isEmpty()) {
+			url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName
+					+ ";encrypt=true;trustServerCertificate=true"; // 👈 Thêm dòng này
+		}
+
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		return DriverManager.getConnection(url, userID, password);
+	}
+
+	public static void main(String[] args) {
+	        try {
+	            Connection conn = new DBConnection().getConnection();
+	            if (conn != null) {
+	                System.out.println("✅ Kết nối SQL Server thành công bằng SQL Authentication!");
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	}
+
+}

@@ -1,0 +1,35 @@
+package CSDL;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class connect {
+	private final String serverName = "FINNTRAN";
+	private final String dbName = "KNCSDL";
+	private final String portNumber = "1433";
+	private final String instance = "";
+	private final String userID = "";
+	private final String password = "";
+    public Connection getConnection() throws Exception {
+    	String url =
+    	"jdbc:sqlserver://" + serverName + "\\" + instance + ":" + portNumber +
+    	";databaseName=" + dbName;
+    	if (instance == null || instance.trim().isEmpty())
+    	url =
+    	"jdbc:sqlserver://"+serverName+":"+portNumber
+    	+";databaseName="+dbName;
+    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    	return DriverManager.getConnection(url, userID, password);
+    	}
+
+    public static void main(String[] args) {
+        try {
+            Connection conn = new connect().getConnection();
+            if (conn != null) {
+                System.out.println("✅ Kết nối SQL Server thành công bằng Windows Authentication!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

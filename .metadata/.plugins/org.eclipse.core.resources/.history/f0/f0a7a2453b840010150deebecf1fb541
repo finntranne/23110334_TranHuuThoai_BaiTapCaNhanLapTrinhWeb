@@ -1,0 +1,5 @@
+package vn.iostar.Controllers;
+
+public class WaitingController {
+
+}

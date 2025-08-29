@@ -1,0 +1,90 @@
+package vn.iostar.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import vn.iostar.Connection.DBConnection;
+import vn.iostar.DAO.IUserDAO;
+import vn.iostar.Model.User;
+
+public class UserDaoimpl extends DBConnection implements IUserDAO{
+	public Connection conn = null;
+	public PreparedStatement ps = null;
+	public ResultSet rs = null;
+	
+
+	@Override
+	public List<User> findALl() {
+		String sql = "select * from USERS";
+		List<User> list = new ArrayList<>();
+		try {
+			conn = super.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				list.add(new User(rs.getInt("id"), 
+						rs.getString("username"), 
+						rs.getString("password"), 
+						rs.getString("email"), 
+						rs.getString("fullname"), 
+						rs.getString("avatar"), 
+						rs.getInt("roleid"), 
+						rs.getString("phone"), 
+						rs.getDate("createddate")));
+							}
+			return list;
+			}
+			catch(Exception e){
+				e.printStackTrace();
+		}
+			
+		return null;
+	}
+
+	@Override
+	public User findById(int id) {
+		return null;
+	}
+
+	@Override
+	public void insert(User user) {
+		String sql = "INSERT INTO User(id, email, username, fullname, password, avatar, roleid, phone, createddate) VALUES (?,?,?,?,?,?,?,?,?)";
+	try {
+		conn = super.getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, user.getId());
+		ps.setString(2, user.getEmail());
+		ps.setString(3, user.getUserName());
+		ps.setString(4, user.getFullName());
+		ps.setString(5, user.getPassWord());
+		ps.setString(6, user.getAvatar());
+		ps.setInt(7, user.getRoleid());
+		ps.setString(8, user.getPhone());
+		ps.setDate(9, user.getCreatedDate());
+		ps.executeUpdate();
+		
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+		
+	}
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		UserDaoimpl userDao = new UserDaoimpl();
+		userDao.insert(new User(1, "a", "b", "c", "d", "e", 2, "f", java.sql.Date.valueOf("01/01/2005")));
+		List<User> list = userDao.findALl();
+		for (User user : list) {
+			System.out.println(user);
+		}
+		
+	}
+	
+
+}

@@ -1,0 +1,21 @@
+package vn.iostar.Services.impl;
+
+import vn.iostar.Model.User;
+import vn.iostar.Services.IUserServices;
+
+public class UserServices implements IUserServices{
+	IUserDAO userDao = new UserDao
+
+	@Override
+	public User login(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User FindByUserName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
